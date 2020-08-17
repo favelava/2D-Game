@@ -232,7 +232,20 @@ public class CharacterController : MonoBehaviour
     {
         if (Time.time >= m_nextDashTime)
         {
-            m_Rigidbody2D.velocity = new Vector2(m_dashDirection * m_DashSpeed, 0f);
+            Vector2 velocity;
+            
+            if (Input.GetButton("Vertical"))
+            {
+                float verticalDir = Math.Sign(Input.GetAxisRaw("Vertical"));
+
+                velocity = new Vector2(m_dashDirection * m_DashSpeed * 0.2f, verticalDir * m_DashSpeed * 0.2f);
+            } else
+            {
+                velocity = new Vector2(m_dashDirection * m_DashSpeed, 0f);
+            }
+
+            m_Rigidbody2D.velocity = velocity;
+
             m_nextDashTime = Time.time + 1f / m_dashRate;
 
             yield return new WaitForSeconds(0.3f);
