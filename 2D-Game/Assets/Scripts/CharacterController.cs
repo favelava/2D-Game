@@ -10,7 +10,7 @@ public class CharacterController : MonoBehaviour
 
     [SerializeField] private float m_Jumpforce = 5f;                             //Amount of force added when a player jumps
     [Range(0, 1f)] [SerializeField] private float m_maxJumpTime = 0.3f;          //Amount of time a player can jump for 
-    [Range(0, 1f)] [SerializeField] private float m_maxClingTime = 1f;         //Amount of time a player can cling to a wall
+    [Range(0, 1f)] [SerializeField] private float m_maxClingTime = 1f;           //Amount of time a player can cling to a wall
     [Range(0, 1f)] [SerializeField] private float m_CrouchSpeed = 0.36f;         //Amount of maxSpeed applied to crouch movment. 1 = 100%
     [Range(0, 100f)] [SerializeField] private float m_DashSpeed = 50f;           //Speed when dashing
     [Range(0, 10f)] [SerializeField] private float m_fallSpeed = 1f;             //Speed when falling
@@ -35,9 +35,11 @@ public class CharacterController : MonoBehaviour
     private bool m_Grounded;                                                     //Whether or not the player is on the ground
     private bool m_isJumping;                                                    //Whether or not the player is currently jumping
     private bool m_canJump;                                                      //Whether or not the player can jump
+    private bool m_canDash;                                                      //Whether or not the player can dash
     private bool m_Walled;                                                       //Whether or not the player is against a wall
-    private bool m_FacingRight = true;                                           //For determining which way the player is currently facing
     private int m_dashDirection;                                                 //Multiplier to change dash direction
+
+    public bool m_FacingRight = true;                                           //For determining which way the player is currently facing
 
     private Rigidbody2D m_Rigidbody2D;
     private Vector3 m_Velocity = Vector3.zero;
@@ -82,6 +84,7 @@ public class CharacterController : MonoBehaviour
             {
                 m_Grounded = true;
                 m_canJump = true;
+                m_canDash = true;
 
                 if (!wasGrounded)
                     OnLandEvent.Invoke();
@@ -99,6 +102,7 @@ public class CharacterController : MonoBehaviour
             {
                 m_Walled = true;
                 m_canJump = true;
+                m_canDash = true;
 
                 if (!wasWalled)
                     OnClingEvent.Invoke();
@@ -212,7 +216,7 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-        if (dash)
+        if (dash && m_canDash)
         {
             m_dashDirection = m_FacingRight ? 1 : -1;
 
@@ -251,6 +255,7 @@ public class CharacterController : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
 
             m_Rigidbody2D.velocity = Vector2.zero;
+            m_canDash = false;
         }
     }
 

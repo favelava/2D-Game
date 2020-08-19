@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\PlayerCombat.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\RopeSystem.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -254,7 +255,7 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="Pathfinding.Ionic.Zip.Reduced">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -611,91 +612,91 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Cinemachine">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Runtime">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.PixelPerfect.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.SpriteShape.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Path.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Triangle.Runtime">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.Animation.Triangle.Runtime.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.Animation.Triangle.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="PsdPlugin">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Psdimporter.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.001">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Common.Runtime">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.SpriteShape.Runtime">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.PixelPerfect">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Common.Editor">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.001">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Dev/Unity Projects/2D-Game/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/Dev/Unity Projects/2D-Game/2D-Game/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
