@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
 
-    //public Animator animator;
-
     public Transform attackPoint;
     public LayerMask enemyLayers;
+    public PlayerMana playerMana;
 
     [SerializeField] const float attackRange = 1.5f;
     [SerializeField] const float attackWidth = 0.5f;
 
     public Vector2 hitBoxSize = new Vector2(attackRange, attackWidth);
     public int attackDamage = 40;
+    public int manaRecov = 20;
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
@@ -42,6 +42,7 @@ public class PlayerCombat : MonoBehaviour
         foreach(Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
+            playerMana.AddMana(manaRecov);
         }
     }
 

@@ -7,8 +7,9 @@ using UnityEngine;
 public class RopeSystem : MonoBehaviour
 {
     
-    [SerializeField] private float maxRopeLength = 20f;
+    [SerializeField] private float maxRopeLength = 10f;
     [SerializeField] private float pullForce = 5f;
+    [SerializeField] private float climbSpeed = 3f;
 
     public GameObject ropeAnchorPoint;
     public DistanceJoint2D ropeJoint;
@@ -20,10 +21,13 @@ public class RopeSystem : MonoBehaviour
     private Rigidbody2D ropeAnchorRB;
     private Rigidbody2D playerRB;
     private List<Vector2> ropePositions = new List<Vector2>();
+    private RaycastHit2D hit;
 
     private int layerMask = 1 << 8;                                 // Layer 8 is solely occupied by the player
+    private bool ropeTethered = false;
     private bool ropeAttached = false;
     private bool distanceSet;
+    private bool isColliding;
 
     private void Awake()
     {
@@ -35,21 +39,25 @@ public class RopeSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         playerPosition = transform.position;
 
         HandleInput();
 
-        if (ropeAttached)
-        {
-
-        } else
-        {
-
-        }
-
         UpdateRopePositions();
+
+        HandleRopeLength();
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        isColliding = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isColliding = false;
     }
 
     private void HandleInput()
@@ -77,12 +85,11 @@ public class RopeSystem : MonoBehaviour
             }
 
             // ~Layermask allows the RayCast to interact with everything except the player layer
-            RaycastHit2D hit = Physics2D.Raycast(playerPosition, dirRope, maxRopeLength, ~layerMask);
+            hit = Physics2D.Raycast(playerPosition, dirRope, maxRopeLength, ~layerMask);
 
             if (hit.collider != null)
             {
                 Collider2D hitCollider = hit.collider;
-                Rigidbody2D hitColliderRB = hitCollider.GetComponent<Rigidbody2D>();
 
                 switch (hitCollider.tag)
                 {
@@ -90,15 +97,12 @@ public class RopeSystem : MonoBehaviour
 
                         if (!ropePositions.Contains(hit.point))
                         {
-                            Vector2 dirToPlayer = (playerPosition - hitColliderRB.position).normalized;
-                            hitColliderRB.AddForce(dirToPlayer * pullForce, ForceMode2D.Impulse);
-                            playerRB.AddForce(-dirToPlayer * pullForce * 2.0f, ForceMode2D.Impulse);
-
                             ropePositions.Add(hit.point);
-                            ropeJoint.distance = Vector2.Distance(playerPosition, hit.point);
-
                             ropeAttached = true;
+                            ropeTethered = true;
                             ropeAnchorSprite.enabled = true;
+                            characterController.isTethered = true;
+                            characterController.ropeHook = hit.point;
                         }
 
                         Debug.Log("Pull!");
@@ -111,13 +115,15 @@ public class RopeSystem : MonoBehaviour
 
                         if (!ropePositions.Contains(hit.point))
                         {
-                            playerRB.AddForce(Vector2.up * pullForce, ForceMode2D.Impulse);
+                            playerRB.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
 
                             ropeAttached = true;
                             ropePositions.Add(hit.point);
                             ropeJoint.distance = Vector2.Distance(playerPosition, hit.point);
                             ropeJoint.enabled = true;
                             ropeAnchorSprite.enabled = true;
+                            characterController.isSwinging = true;
+                            characterController.ropeHook = hit.point;
                         }
                         break;
                     default:
@@ -137,15 +143,20 @@ public class RopeSystem : MonoBehaviour
         }
     }
 
-    private void ResetRope()
+
+
+    public void ResetRope()
     {
         ropeJoint.enabled = false;
         ropeAttached = false;
+        ropeTethered = false;
         ropeRenderer.positionCount = 2;
         ropeRenderer.SetPosition(0, transform.position);
         ropeRenderer.SetPosition(1, transform.position);
         ropePositions.Clear();
         ropeAnchorSprite.enabled = false;
+        characterController.isSwinging = false;
+        characterController.isTethered = false;
     }
 
     private void UpdateRopePositions()
@@ -201,6 +212,22 @@ public class RopeSystem : MonoBehaviour
             {
                 ropeRenderer.SetPosition(1, transform.position);
             }
+        }
+    }
+
+    private void HandleRopeLength()
+    {
+        if (Input.GetAxisRaw("Vertical") >= 1f && ropeAttached && !ropeTethered && !isColliding)
+        {
+            ropeJoint.distance -= Time.deltaTime * climbSpeed;
+        } else if (Input.GetAxisRaw("Vertical") < 0f && ropeAttached && !ropeTethered && !isColliding)
+        {
+            ropeJoint.distance += Time.deltaTime * climbSpeed;
+        }
+
+        if (ropeJoint.distance > maxRopeLength)
+        {
+            ropeJoint.distance = maxRopeLength;
         }
     }
 }

@@ -15,6 +15,8 @@ public class CharacterController : MonoBehaviour
     [Range(0, 100f)] [SerializeField] private float m_DashSpeed = 50f;           //Speed when dashing
     [Range(0, 10f)] [SerializeField] private float m_fallSpeed = 1f;             //Speed when falling
     [Range(0, 0.3f)] [SerializeField] private float m_MovementSmoothing = 0.05f; //How much to smooth out movement
+    [Range(0, 20f)] [SerializeField] private float swingForce = 10f;             //Perpendicular force applied when swinging
+    [Range(0, 20f)] [SerializeField] private float pullForce = 5f;               //Parallel force applied when tethered to enemy
     [SerializeField] private float m_dashRate = 2f;                              //Number of times a player can dash per second
     [SerializeField] private float m_dashDelay = 0.3f;                           //Length of dash animation
 
@@ -39,7 +41,11 @@ public class CharacterController : MonoBehaviour
     private bool m_Walled;                                                       //Whether or not the player is against a wall
     private int m_dashDirection;                                                 //Multiplier to change dash direction
 
-    public bool m_FacingRight = true;                                           //For determining which way the player is currently facing
+    public bool m_FacingRight = true;                                            //For determining which way the player is currently facing
+    public bool isSwinging = false;                                              //Whether or not the player is currently swinging from a hinge, set in RopeSystem
+    public bool isTethered = false;                                              //Whether or not the player is currently tethered to an enemy, set in RopeSystem
+    public string tetherTag;                                                     //The tag of the object the player is tethered to, ser in RopeSystem
+    public Vector2 ropeHook;                                                     //The position of the grappling hook anchor
 
     private Rigidbody2D m_Rigidbody2D;
     private Vector3 m_Velocity = Vector3.zero;
@@ -122,8 +128,8 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-        //Only control the player if grounded or AirControl is turned on
-        if (m_Grounded || m_AirControl)
+        //Only control the player if grounded or AirControl is turned on and they are not swinging or tethered to an enemy
+        if ((m_Grounded || m_AirControl) && !isSwinging && !isTethered)
         {
             //If crouching
             if (crouch)
@@ -213,6 +219,52 @@ public class CharacterController : MonoBehaviour
             if (m_ClingTimer >= m_maxClingTime)
             {
                 m_Rigidbody2D.velocity = Vector2.down * m_fallSpeed;
+            }
+        }
+
+
+        if (isSwinging)
+        {
+            m_canDash = true;
+
+            Vector2 playerToHookDir = (ropeHook - (Vector2) transform.position).normalized;
+
+            Vector2 perpDir;
+
+            if (move != 0f)
+            {
+                if (move < 0f)
+                {
+                    perpDir = new Vector2(-playerToHookDir.y, playerToHookDir.x);
+
+                }
+                else
+                {
+                    perpDir = new Vector2(playerToHookDir.y, -playerToHookDir.x);
+                }
+
+                Vector2 force = perpDir * swingForce;
+                m_Rigidbody2D.AddForce(force);
+            }
+
+            if (dash)
+            {
+                transform.GetComponent<RopeSystem>().ResetRope();
+            }
+        }
+
+        if (isTethered)
+        {
+            if (Vector2.Distance(ropeHook, transform.position) > 1.5f)
+            {
+                Vector2 playerToHookDir = (ropeHook - (Vector2)transform.position).normalized;
+                Vector2 force = playerToHookDir * pullForce;
+                m_Rigidbody2D.AddForce(force, ForceMode2D.Impulse);
+            } else
+            {
+                isTethered = false;
+                ropeHook = Vector2.zero;
+                m_Rigidbody2D.velocity = Vector2.zero;
             }
         }
 
